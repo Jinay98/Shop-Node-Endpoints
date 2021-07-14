@@ -2,9 +2,24 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
+
+// var conn = mongoose.connect("mongodb://localhost:27017/shop", {
+//   useMongoClient: true,
+// });
+
+const dbUrl = "mongodb://localhost:27017/shop-db";
+mongoose
+  .connect(dbUrl, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  })
+  .then((con) => console.log("DB connection successful"));
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,7 +38,6 @@ app.use((req, res, next) => {
   next();
 });
 
-//Routes which should handle requests
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 
