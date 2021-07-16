@@ -7,10 +7,6 @@ const mongoose = require("mongoose");
 const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
 
-// var conn = mongoose.connect("mongodb://localhost:27017/shop", {
-//   useMongoClient: true,
-// });
-
 const dbUrl = "mongodb://localhost:27017/shop-db";
 mongoose
   .connect(dbUrl, {
