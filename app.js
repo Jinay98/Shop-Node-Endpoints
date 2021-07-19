@@ -35,7 +35,11 @@ app.use((req, res, next) => {
   }
   next();
 });
-
+app.use("/health", (req, res, next) => {
+  res.status(200).json({
+    message: "Server is up and running",
+  });
+});
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/user", userRoutes);
